@@ -31,6 +31,8 @@ impl UniqueIdActor {
         }
     }
 
+    /// Generate a new UID. Each node starts at a different offset (node 0 - offset 0, node 1 - offset 1, etc)
+    /// and atomically adds the total number of nodes to its current number to generate IDs unique across all nodes
     fn generate_uid(&self) -> u64 {
         self.next_id.fetch_add(self.num_actors, Ordering::SeqCst)
     }
